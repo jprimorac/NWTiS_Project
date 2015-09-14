@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view locale="#{lokalizacija.vazecaLocalizacija}">
+       
+        <h:body>
+            <ui:composition template=".././predlozak.xhtml">
+
+                <ui:define name="naslov">
+                    #{m.admin_korisnici}
+                </ui:define>
+
+                <ui:define name="top">
+                    #{m.admin_korisnici}
+                </ui:define>
+
+                <ui:define name="left">
+                    <h:link outcome="/index.xhtml" value="#{m.index_odabirJezika}"/><br/>
+                    <h:link outcome="/odjava.xhtml" value="#{m.odjava_naziv}"/><br/>
+                    <h:link outcome="azuriranjeCjenika" value="#{m.admin_cjenik}"/><br/>
+                    <h:link outcome="pregledPoruka" value="#{m.admin_poruke}"/><br/>
+                    <h:link outcome="pregledDnevnika" value="#{m.admin_dnevnik}"/>
+
+                </ui:define>
+
+                <ui:define name="content">
+                    #{m.admin_korisnici}
+                    <h:panelGroup layout="block">
+                        <h:form>
+                        <p:dataTable  var="korisnik" value="#{pregledKorisnika.korisnici}" rows="10" paginator="true" paginatorPosition="bottom">
+                            <f:facet name="header">
+                                #{m.korisnici}
+                            </f:facet>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{m.prijava_korisnickoIme}" />
+                                </f:facet>
+                                <h:outputText value="#{korisnik.korisnickoime}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{m.korisnik_ime}" />
+                                </f:facet>
+                                <h:outputText value="#{korisnik.ime}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{m.korisnik_prezime}" />
+                                </f:facet>
+                                <h:outputText value="#{korisnik.prezime}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{m.korisnik_email}" />
+                                </f:facet>
+                                <h:outputText value="#{korisnik.email}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{m.korisnik_tipKorisnika}" />
+                                </f:facet>
+                                <h:outputText value="#{korisnik.tipkorisnika}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{m.korisnik_azuriraj}" />
+                                </f:facet>
+                                <h:commandLink value="#{m.korisnik_azuriraj}" action="#{pregledKorisnika.azurirajKorisnika()}" >
+                                    <f:param name="odabrani" value="#{korisnik.korisnickoime}" />
+                                </h:commandLink> 
+                            </p:column>
+
+
+                        </p:dataTable>
+                        </h:form>
+                    </h:panelGroup>
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>
+

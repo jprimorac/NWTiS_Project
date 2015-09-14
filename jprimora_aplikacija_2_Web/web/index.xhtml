@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:view locale="#{lokalizacija.vazecaLocalizacija}">
+
+        <h:body>
+            <ui:composition template="./predlozak.xhtml">
+
+                <ui:define name="naslov">
+                    #{m.index_naslov}
+                </ui:define>
+
+                <ui:define name="top">
+                    #{m.index_naslov}
+                </ui:define>
+
+                <ui:define name="left">
+                    <h:link outcome="prijava" value="#{m.prijava_naziv}"/><br/>
+                    <h:link outcome="registracija" value="#{m.registracija_naziv}"/>
+                </ui:define>
+                
+                <ui:define name="content">
+
+                    #{m.index_odabirJezika}
+                    <h:form>
+                        <h:selectOneRadio value="#{lokalizacija.odabraniJezik}">
+
+                            <f:selectItems value="#{lokalizacija.jezici}"/><br/>
+                        </h:selectOneRadio>
+                        <h:commandButton value="#{m.index_promjeniJezik}" action="#{lokalizacija.odaberiJezik}"/>
+                        <br/><br/>
+
+
+                    </h:form> 
+                </ui:define>
+
+
+                <ui:define name="bottom">
+                    Josip Primorac &copy; 2015
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>
+
+
+

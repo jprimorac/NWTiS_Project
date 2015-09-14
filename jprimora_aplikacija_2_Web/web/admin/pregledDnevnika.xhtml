@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:l="http://xmlns.jcp.org/jsf/passthrough">
+    <f:view locale="#{lokalizacija.vazecaLocalizacija}">
+        
+        <h:body>
+            <ui:composition template=".././predlozak.xhtml">
+
+                <ui:define name="naslov">
+                    #{m.admin_dnevnik}
+                </ui:define>
+
+                <ui:define name="top">
+                    #{m.admin_dnevnik}
+                </ui:define>
+
+                <ui:define name="left">
+                    <h:link outcome="/index.xhtml" value="#{m.index_odabirJezika}"/><br/>
+                    <h:link outcome="/odjava.xhtml" value="#{m.odjava_naziv}"/><br/>
+                    <h:link outcome="azuriranjeCjenika" value="#{m.admin_cjenik}"/><br/>
+                    <h:link outcome="pregledPoruka" value="#{m.admin_korisnici}"/><br/>
+                    <h:link outcome="pregledKorisnika" value="#{m.admin_korisnici}"/>
+
+                </ui:define>
+
+                <ui:define name="content">
+                    #{m.dnevnik_filteri}
+                    <h:form id="forma">
+                        <p:outputLabel value="#{m.dnevnik_vrijemeOdDo}"/>
+                        <p:calendar id="calendarOd" value="#{pregledDnevnika.datumOd}" placeholder="#{m.dnevnik_datumOd}" />
+                        <p:inputText id="satiOd" value="#{pregledDnevnika.satiOd}" l:type="number" l:min="1" l:max="23" placeholder="#{m.dnevnik_satiOd}"/>
+                        <p:inputText id="minuteOd" value="#{pregledDnevnika.minuteOd}" l:type="number" l:min="1" l:max="59" placeholder="#{m.dnevnik_minuteOd}"/>
+                        <p:calendar id="calendarDo" value="#{pregledDnevnika.datumDo}" placeholder="#{m.dnevnik_datumOd}" />
+                        <p:inputText id="satiDo" value="#{pregledDnevnika.satiDo}" l:type="number" l:min="1" l:max="23" placeholder="#{m.dnevnik_satiDo}"/>
+                        <p:inputText id="minuteDo" value="#{pregledDnevnika.minuteDo}" l:type="number" l:min="1" l:max="59" placeholder="#{m.dnevnik_minuteDo}"/>
+                        <br/>
+                        <p:outputLabel for="ipAdresa" value="#{m.dnevnik_ipAdresa}"/>
+                        <p:inputText id="ipAdresa" value="#{pregledDnevnika.ipAdresa}"/>
+                        <br/>
+                        <p:outputLabel for="trajanje" value="#{m.dnevnik_trajanjeOdDo}"/>
+                        <p:inputText id="trajanjeOd" l:type="number" value="#{pregledDnevnika.trajanjeOd}"/>
+                        <p:inputText id="trajanje" l:type="number" value="#{pregledDnevnika.trajanjeDo}"/>
+                        <br/>
+                        <p:outputLabel for="korisnik" value="#{m.dnevnik_korisnik}"/>
+                        <p:inputText id="korisnik" value="#{pregledDnevnika.korisnickoIme}"/>
+                        <br/>
+
+                        <p:commandButton value="#{m.dnevnik_preuzmi}" action="#{pregledDnevnika.preuzmiDnevnik()}">
+                            <f:ajax execute="forma" render="forma"/>
+                        </p:commandButton> 
+                        <br/>
+
+                        <p:dataTable  var="dnevnik" value="#{pregledDnevnika.dnevnik}" rows="10" paginator="true" paginatorPosition="bottom">
+                            <f:facet name="header">
+                                #{m.admin_dnevnik}
+                            </f:facet>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ID" />
+                                </f:facet>
+                                <h:outputText value="#{dnevnik.iddnevnik}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Korisnik" />
+                                </f:facet>
+                                <h:outputText value="#{dnevnik.korisnik}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="URL" />
+                                </f:facet>
+                                <h:outputText value="#{dnevnik.url}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{m.dnevnik_ipAdresa}" />
+                                </f:facet>
+                                <h:outputText value="#{dnevnik.ipadresa}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{m.dnevnik_vrijeme}" />
+                                </f:facet>
+                                <h:outputText value="#{dnevnik.vrijeme}" >
+                                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" timeZone="Europe/Zagreb" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{m.dnevnik_trajanje}" />
+                                </f:facet>
+                                <h:outputText value="#{dnevnik.trajanje}" />
+                            </p:column>
+                            
+
+                        </p:dataTable>
+                    </h:form>
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>
+

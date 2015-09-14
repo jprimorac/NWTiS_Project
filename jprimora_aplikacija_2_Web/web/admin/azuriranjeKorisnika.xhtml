@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view locale="#{lokalizacija.vazecaLocalizacija}">
+
+        
+        
+        <h:body>
+            <ui:composition template=".././predlozak.xhtml">
+
+                <ui:define name="naslov">
+                    #{m.korisnik_naslov}
+                </ui:define>
+
+                <ui:define name="top">
+                    #{m.korisnik_naslov}
+                </ui:define>
+
+                <ui:define name="left">
+                    <h:link outcome="/index.xhtml" value="#{m.index_odabirJezika}"/><br/>
+                    <h:link outcome="/odjava.xhtml" value="#{m.odjava_naziv}"/><br/>
+                    <h:link outcome="azuriranjeCjenika" value="#{m.admin_cjenik}"/><br/>
+                    <h:link outcome="pregledPoruka" value="#{m.admin_poruke}"/><br/>
+                    <h:link outcome="pregledKorisnika" value="#{m.admin_korisnici}"/><br/>
+                    <h:link outcome="pregledDnevnika" value="#{m.admin_dnevnik}"/>
+
+                </ui:define>
+
+                <ui:define name="content">
+                    #{m.korisnik_naslov}
+                    <h:form id="forma">
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="#{m.prijava_korisnickoIme}"/>
+                            <h:inputText value="#{azuriranjeKorisnika.korisnik.korisnickoime}" readonly="true"/>
+                            <h:outputLabel value="#{m.prijava_lozinka}"/>
+                            <h:inputText value="#{azuriranjeKorisnika.korisnik.lozinka}" required="true"/>
+                            <h:outputLabel value="#{m.korisnik_ime}"/>
+                            <h:inputText value="#{azuriranjeKorisnika.korisnik.ime}" required="true"/>
+                            <h:outputLabel value="#{m.korisnik_prezime}"/>
+                            <h:inputText value="#{azuriranjeKorisnika.korisnik.prezime}" required="true"/>
+                            <h:outputLabel value="#{m.korisnik_email}"/>
+                            <h:inputText value="#{azuriranjeKorisnika.korisnik.email}" required="true"/>
+                            <h:outputLabel value="#{m.korisnik_tipKorisnika}"/>
+                            <h:selectOneListbox value="#{azuriranjeKorisnika.korisnik.tipkorisnika}">
+                                <f:selectItem itemValue="korisnik" itemLabel="korisnik" />
+                                <f:selectItem itemValue="admin" itemLabel="admin" />
+                            </h:selectOneListbox>
+
+                            <h:commandButton value="#{m.korisnik_azuriraj}" action="#{azuriranjeKorisnika.azurirajKorisnika()}">
+                                <f:ajax execute="forma" render="forma"/>
+                            </h:commandButton>
+
+
+
+                        </h:panelGrid>
+
+
+                    </h:form> 
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>
+

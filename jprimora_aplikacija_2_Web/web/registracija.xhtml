@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view locale="#{lokalizacija.vazecaLocalizacija}">
+        
+        <h:head>
+            <title>#{m.registracija_naslov}</title>
+        </h:head>
+        <h:body>
+            <ui:composition template="./predlozak.xhtml">
+
+                <ui:define name="naslov">
+                    #{m.registracija_naslov}
+                </ui:define>
+
+                <ui:define name="top">
+                    #{m.registracija_naslov}
+                </ui:define>
+
+                <ui:define name="left">
+                    <h:link outcome="index.xhtml" value="#{m.index_odabirJezika}"/><br/>
+                    <h:link outcome="prijava" value="#{m.prijava_naziv}"/>
+                </ui:define>
+
+                <ui:define name="content">
+                    #{m.registracija_naslov}
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="#{m.prijava_korisnickoIme}"/>
+                            <h:inputText value="#{registracija.korisnickoIme}" required="true"/>
+                            <h:outputLabel value="#{registracija.korisnickoGreska}"/> <br/>
+                            <h:outputLabel value="#{m.prijava_lozinka}"/>
+                            <h:inputSecret value="#{registracija.lozinka}" required="true"/>
+                            <h:outputLabel value="#{registracija.lozinkaGreska}"/> <br/>
+                            <h:outputLabel value="#{m.registracija_lozinka2}"/>
+                            <h:inputSecret value="#{registracija.lozinka2}" required="true"/>
+
+                            <h:commandButton value="#{m.registracija_registrirajSe}" action="#{registracija.registrirajKorisnika()}"/>
+
+                        </h:panelGrid>
+
+
+                    </h:form> 
+                </ui:define>
+                <ui:define name="bottom">
+                    Josip Primorac &copy; 2015
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>

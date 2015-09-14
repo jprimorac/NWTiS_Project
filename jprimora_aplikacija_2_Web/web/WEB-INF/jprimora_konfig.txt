@@ -1,0 +1,29 @@
+#NWTIS konfiguracija
+#Thu Apr 30 12:00:00 CET 2015
+#koristim
+intervalDretve=30
+cjenik1=cjenik1.xml
+cjenik2=cjenik2.xml
+apiKey=60cb7df3c4e929f89bd93012caf54c3a
+stranicenje=10
+
+emailPosluzitelj=127.0.0.1
+emailAdresa=servis@nwtis.nastava.foi.hr
+emailLozinka=123456
+emailPredmet=NWTiS poruka
+datoteka=rjecnik.txt
+ispravnePoruke=NWTiS_IspravnePoruke
+ostalePoruke=NWTiS_OstalePoruke
+adresaZaSlanje=admin@nwtis.nastava.foi.hr
+statistikaPredmet=Statistika poruka
+mapaZaSlanje=Sent
+brojDretvi=7
+server=localhost
+port=8000
+brojPoruka=20
+#nekoristim
+razmakDretvi=10
+pauzaProblema=3
+brojPokusajaProblema=7
+
+

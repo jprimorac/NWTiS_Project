@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Cjenik 1</comment>
+<entry key="trenutni">0.30</entry>
+<entry key="dodaneAdrese">0.20</entry>
+<entry key="rangLista">0.20</entry>
+<entry key="posljednjiN">0.70</entry>
+<entry key="intervalPrognoza">0.50</entry>
+<entry key="stanice">0.20</entry>
+<entry key="prognozaSati">0.80</entry>
+<entry key="prognozaDani">0.90</entry>
+</properties>

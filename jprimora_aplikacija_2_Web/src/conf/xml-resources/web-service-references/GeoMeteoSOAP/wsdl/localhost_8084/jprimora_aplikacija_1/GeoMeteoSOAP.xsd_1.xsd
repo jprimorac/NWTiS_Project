@@ -1,0 +1,235 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2.6-1b01  svn-revision#13094. --><xs:schema xmlns:tns="http://ws.jprimoora.nwtis.foi.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws.jprimoora.nwtis.foi.org/">
+
+<xs:element name="listaDodanihAdresa" type="tns:listaDodanihAdresa"/>
+
+<xs:element name="listaDodanihAdresaBesplatno" type="tns:listaDodanihAdresaBesplatno"/>
+
+<xs:element name="listaDodanihAdresaBesplatnoResponse" type="tns:listaDodanihAdresaBesplatnoResponse"/>
+
+<xs:element name="listaDodanihAdresaResponse" type="tns:listaDodanihAdresaResponse"/>
+
+<xs:element name="meteoZaAdresuUIntervalu" type="tns:meteoZaAdresuUIntervalu"/>
+
+<xs:element name="meteoZaAdresuUIntervaluResponse" type="tns:meteoZaAdresuUIntervaluResponse"/>
+
+<xs:element name="posljednjiNMeteoZaAdresu" type="tns:posljednjiNMeteoZaAdresu"/>
+
+<xs:element name="posljednjiNMeteoZaAdresuResponse" type="tns:posljednjiNMeteoZaAdresuResponse"/>
+
+<xs:element name="prognozaZaNDanaZaAdresu" type="tns:prognozaZaNDanaZaAdresu"/>
+
+<xs:element name="prognozaZaNDanaZaAdresuResponse" type="tns:prognozaZaNDanaZaAdresuResponse"/>
+
+<xs:element name="prognozaZaNSatiZaAdresu" type="tns:prognozaZaNSatiZaAdresu"/>
+
+<xs:element name="prognozaZaNSatiZaAdresuResponse" type="tns:prognozaZaNSatiZaAdresuResponse"/>
+
+<xs:element name="rangListaAdresa" type="tns:rangListaAdresa"/>
+
+<xs:element name="rangListaAdresaResponse" type="tns:rangListaAdresaResponse"/>
+
+<xs:element name="staniceNUBliziniAdrese" type="tns:staniceNUBliziniAdrese"/>
+
+<xs:element name="staniceNUBliziniAdreseResponse" type="tns:staniceNUBliziniAdreseResponse"/>
+
+<xs:element name="trenutniMeteoZaAdresu" type="tns:trenutniMeteoZaAdresu"/>
+
+<xs:element name="trenutniMeteoZaAdresuResponse" type="tns:trenutniMeteoZaAdresuResponse"/>
+
+<xs:complexType name="posljednjiNMeteoZaAdresu">
+<xs:sequence>
+<xs:element name="adresa" type="xs:string" minOccurs="0"/>
+<xs:element name="broj" type="xs:int"/>
+<xs:element name="korisnickoIme" type="xs:string" minOccurs="0"/>
+<xs:element name="lozinka" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="posljednjiNMeteoZaAdresuResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:soapListaMeteo" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="soapListaMeteo">
+<xs:sequence>
+<xs:element name="listaMeteo" type="tns:meteoPodaci" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="odgovor" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="meteoPodaci">
+<xs:sequence>
+<xs:element name="adresa" type="xs:string" minOccurs="0"/>
+<xs:element name="cloudsName" type="xs:string" minOccurs="0"/>
+<xs:element name="cloudsValue" type="xs:int"/>
+<xs:element name="humidityUnit" type="xs:string" minOccurs="0"/>
+<xs:element name="humidityValue" type="xs:float" minOccurs="0"/>
+<xs:element name="lastUpdate" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="precipitationMode" type="xs:string" minOccurs="0"/>
+<xs:element name="precipitationUnit" type="xs:string" minOccurs="0"/>
+<xs:element name="precipitationValue" type="xs:float" minOccurs="0"/>
+<xs:element name="pressureUnit" type="xs:string" minOccurs="0"/>
+<xs:element name="pressureValue" type="xs:float" minOccurs="0"/>
+<xs:element name="sunRise" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="sunSet" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="temperatureMax" type="xs:float" minOccurs="0"/>
+<xs:element name="temperatureMin" type="xs:float" minOccurs="0"/>
+<xs:element name="temperatureUnit" type="xs:string" minOccurs="0"/>
+<xs:element name="temperatureValue" type="xs:float" minOccurs="0"/>
+<xs:element name="visibility" type="xs:string" minOccurs="0"/>
+<xs:element name="weatherIcon" type="xs:string" minOccurs="0"/>
+<xs:element name="weatherNumber" type="xs:int"/>
+<xs:element name="weatherValue" type="xs:string" minOccurs="0"/>
+<xs:element name="windDirectionCode" type="xs:string" minOccurs="0"/>
+<xs:element name="windDirectionName" type="xs:string" minOccurs="0"/>
+<xs:element name="windDirectionValue" type="xs:float" minOccurs="0"/>
+<xs:element name="windSpeedName" type="xs:string" minOccurs="0"/>
+<xs:element name="windSpeedValue" type="xs:float" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="trenutniMeteoZaAdresu">
+<xs:sequence>
+<xs:element name="adresa" type="xs:string" minOccurs="0"/>
+<xs:element name="korisnickoIme" type="xs:string" minOccurs="0"/>
+<xs:element name="lozinka" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="trenutniMeteoZaAdresuResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:soapJedanMeteo" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="soapJedanMeteo">
+<xs:sequence>
+<xs:element name="meteo" type="tns:meteoPodaci" minOccurs="0"/>
+<xs:element name="odgovor" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="rangListaAdresa">
+<xs:sequence>
+<xs:element name="korisnickoIme" type="xs:string" minOccurs="0"/>
+<xs:element name="lozinka" type="xs:string" minOccurs="0"/>
+<xs:element name="broj" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="rangListaAdresaResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:soapListaAdresa" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="soapListaAdresa">
+<xs:sequence>
+<xs:element name="adrese" type="tns:adresa" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="odgovor" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="adresa">
+<xs:sequence>
+<xs:element name="adresa" type="xs:string" minOccurs="0"/>
+<xs:element name="geoloc" type="tns:lokacija" minOccurs="0"/>
+<xs:element name="idadresa" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="lokacija">
+<xs:sequence>
+<xs:element name="latitude" type="xs:string" minOccurs="0"/>
+<xs:element name="longitude" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="prognozaZaNDanaZaAdresu">
+<xs:sequence>
+<xs:element name="adresa" type="xs:string" minOccurs="0"/>
+<xs:element name="broj" type="xs:int"/>
+<xs:element name="korisnickoIme" type="xs:string" minOccurs="0"/>
+<xs:element name="lozinka" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="prognozaZaNDanaZaAdresuResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:soapListaMeteo" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="prognozaZaNSatiZaAdresu">
+<xs:sequence>
+<xs:element name="adresa" type="xs:string" minOccurs="0"/>
+<xs:element name="broj" type="xs:int"/>
+<xs:element name="korisnickoIme" type="xs:string" minOccurs="0"/>
+<xs:element name="lozinka" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="prognozaZaNSatiZaAdresuResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:soapListaMeteo" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="listaDodanihAdresa">
+<xs:sequence>
+<xs:element name="korisnickoIme" type="xs:string" minOccurs="0"/>
+<xs:element name="lozinka" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="listaDodanihAdresaResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:soapListaAdresa" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="staniceNUBliziniAdrese">
+<xs:sequence>
+<xs:element name="adresa" type="xs:string" minOccurs="0"/>
+<xs:element name="korisnickoIme" type="xs:string" minOccurs="0"/>
+<xs:element name="lozinka" type="xs:string" minOccurs="0"/>
+<xs:element name="broj" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="staniceNUBliziniAdreseResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:soapListaAdresa" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="meteoZaAdresuUIntervalu">
+<xs:sequence>
+<xs:element name="adresa" type="xs:string" minOccurs="0"/>
+<xs:element name="odtad" type="xs:string" minOccurs="0"/>
+<xs:element name="dotad" type="xs:string" minOccurs="0"/>
+<xs:element name="korisnickoIme" type="xs:string" minOccurs="0"/>
+<xs:element name="lozinka" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="meteoZaAdresuUIntervaluResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:soapListaMeteo" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="listaDodanihAdresaBesplatno">
+<xs:sequence>
+<xs:element name="korisnickoIme" type="xs:string" minOccurs="0"/>
+<xs:element name="lozinka" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="listaDodanihAdresaBesplatnoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:soapListaAdresa" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

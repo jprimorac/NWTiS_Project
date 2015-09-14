@@ -1,0 +1,357 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <h:body>
+        <ui:composition template="./predlozak.xhtml">
+
+            <ui:define name="naslov">
+                Josip Primorac Aplikacija 3
+            </ui:define>
+
+            <ui:define name="top">
+                Josip Primorac Aplikacija 3
+            </ui:define>
+
+
+            <ui:define name="left">
+                <h:form>
+                    <h:commandLink action="#{konzola.otvoriJMSPoruke()}" value="JMS poruke">
+                        <f:ajax render="forma1"/>
+                    </h:commandLink><br/>
+                    <h:commandLink action="#{konzola.otvoriDodavanjeKorisnika()}" value="Dodaj korisnika">
+                        <f:ajax render="forma1"/>
+                    </h:commandLink><br/>
+                    <h:commandLink action="#{konzola.otvoriAktivneKorisnike()}" value="Aktivni korisnici">
+                        <f:ajax render="forma1"/>
+                    </h:commandLink><br/>
+                    <h:commandLink action="#{konzola.otvoriKonzolu()}" value="Konzola">
+                        <f:ajax render="forma1"/>
+                    </h:commandLink>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="content">
+                
+                <h:form id="forma1">
+<p:remoteCommand name="refreshList" update="forma1" actionListener="#{konzola.osvjeziJMS()}">
+                </p:remoteCommand>
+                    <p:remoteCommand name="refreshList" update="porukeForma" actionListener="#{konzola.osvjeziJMS()}">
+                    </p:remoteCommand> 
+                    <h:panelGroup id="JMSPoruke" layout="block" rendered="#{konzola.otvoreneJMSPoruke==true}">
+                        <h:form id="porukeForma">
+
+                            <h:commandButton value="Izbrisi sve" id="izbrisiSve" action="#{konzola.izbrisiSveJMS()}">
+                                <f:ajax render="porukeForma"/>
+                            </h:commandButton>
+
+                            <p:dataTable  var="poruka" value="#{konzola.poruke1}" rows="10" paginator="true" paginatorPosition="bottom">
+                                <f:facet name="header">
+                                    JMS poruke prvog reda
+                                </f:facet>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Vrijeme pocetka" />
+                                    </f:facet>
+                                    <h:outputText value="#{poruka.vrijemePocetka}" >
+                                        <f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" timeZone="Europe/Zagreb" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Vrijeme zavrsetka" />
+                                    </f:facet>
+                                    <h:outputText value="#{poruka.vrijemeZavrsetka}" >
+                                        <f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" timeZone="Europe/Zagreb" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Broj poruka" />
+                                    </f:facet>
+                                    <h:outputText value="#{poruka.brojPoruka}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Broj NWTiS poruka" />
+                                    </f:facet>
+                                    <h:outputText value="#{poruka.brojNWTiSPoruka}" />
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Otvori" />
+                                    </f:facet>
+                                    <h:commandLink value="Otvori" action="#{konzola.otvoriJednuJMS()}" >
+                                        <f:param name="milis" value="#{poruka.milis}" />
+                                        <f:ajax execute="forma1" render="forma1"/>
+                                    </h:commandLink> 
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Obrisi" />
+                                    </f:facet>
+                                    <h:commandLink value="Obrisi" action="#{konzola.izbrisiJMS()}" >
+                                        <f:param name="milis" value="#{poruka.milis}" />
+                                        <f:ajax execute="forma1" render="forma1"/>
+                                    </h:commandLink> 
+                                </p:column>
+                            </p:dataTable>
+
+
+                            <p:dataTable  var="poruka2" value="#{konzola.poruke2}" rows="10" paginator="true" paginatorPosition="bottom">
+                                <f:facet name="header">
+                                    JMS poruke drugog reda
+                                </f:facet>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Korisnicko ime" />
+                                    </f:facet>
+                                    <h:outputText value="#{poruka2.korisnickoIme}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Lozinka" />
+                                    </f:facet>
+                                    <h:outputText value="#{poruka2.lozinka}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Adresa" />
+                                    </f:facet>
+                                    <h:outputText value="#{poruka2.adresa}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Otvori" />
+                                    </f:facet>
+                                    <h:commandLink value="Otvori" action="#{konzola.otvoriJednuJMS()}" >
+                                        <f:param name="milis" value="#{poruka2.milis}" />
+                                        <f:ajax execute="forma1" render="forma1"/>
+                                    </h:commandLink> 
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Obrisi" />
+                                    </f:facet>
+                                    <h:commandLink value="Obrisi" action="#{konzola.izbrisiJMS()}" >
+                                        <f:param name="milis" value="#{poruka2.milis}" />
+                                        <f:ajax execute="forma1" render="forma1"/>
+                                    </h:commandLink> 
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </h:panelGroup>
+
+                    <h:panelGroup id="JednaJMS" layout="block" rendered="#{konzola.otvorenaJednaJMS==true}">
+                        <h:form>
+                            <h:commandButton value="zatvoriJednuJMS" action="#{konzola.zatvoriJednuJMS()}">
+                                <f:ajax render="forma1"/>
+                            </h:commandButton>
+                            <h:panelGroup id="PrvaPoruka" layout="block" rendered="#{konzola.otvorenaPrva==true}">
+
+                                <h:outputLabel value="Vrijeme pocetka: "/>
+                                <h:outputText value="#{konzola.prvaPoruka.vrijemePocetka}">
+                                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" timeZone="Europe/Zagreb" />
+                                </h:outputText><br/>
+                                <h:outputLabel value="Vrijeme zavrsetka: "/>
+                                <h:outputText value="#{konzola.prvaPoruka.vrijemeZavrsetka}">
+                                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" timeZone="Europe/Zagreb" />
+                                </h:outputText><br/>
+                                <h:outputLabel value="Broj poruka: "/>
+                                <h:outputText value="#{konzola.prvaPoruka.brojPoruka}"/><br/>
+                                <h:outputLabel value="Broj nwtisPoruka: "/>
+                                <h:outputText value="#{konzola.prvaPoruka.brojNWTiSPoruka}"/><br/>
+
+                                <p:dataTable  var="korisnik" value="#{konzola.prvaPoruka.dodaniKorisnici}" rows="10" paginator="true" paginatorPosition="bottom">
+                                    <f:facet name="header">
+                                        Dodani Korisnici
+                                    </f:facet>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Korisnicko ime" />
+                                        </f:facet>
+                                        <h:outputText value="#{korisnik.korisnickoime}" />
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Lozinka" />
+                                        </f:facet>
+                                        <h:outputText value="#{korisnik.lozinka}" />
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Tip Korisnika" />
+                                        </f:facet>
+                                        <h:outputText value="#{korisnik.tipkorisnika}" />
+                                    </p:column>
+
+                                </p:dataTable>
+
+                            </h:panelGroup>
+                            <h:panelGroup id="DrugaPoruka" layout="block" rendered="#{konzola.otvorenaDruga==true}">
+                                <h:outputLabel value="Korisnik: "/>
+                                <h:outputText value="#{konzola.drugaPoruka.korisnickoIme}"/>
+                                <h:outputLabel  value="Lozinka: "/>
+                                <h:outputText value="#{konzola.drugaPoruka.lozinka}"/><br/>
+                                <h:outputLabel value="Adresa: "/>
+                                <h:outputText value="#{konzola.drugaPoruka.adresa}"/><br/>
+                            </h:panelGroup>
+                        </h:form>
+                    </h:panelGroup>
+
+                    <h:panelGroup id="NoviKorisnik" layout="block" rendered="#{konzola.otvorenoDodavanjeKorisnika==true}">
+                        Dodavanje korisnika <br/>
+
+                        <h:form id="dodavanjeKorisnika">
+                            <h:outputLabel value="Korisnicko ime:"/>
+                            <h:inputText value="#{konzola.noviKorisnicko}"/><br/>
+                            <h:outputLabel value="Lozinka: "/>
+                            <h:inputText value="#{konzola.noviLozinka}"/>
+                            <h:commandButton value="Dodaj korisnika" action="#{konzola.dodajKorisnika()}">
+                                <f:ajax execute="dodavanjeKorisnika" render="forma1"/>
+                            </h:commandButton>
+                        </h:form>
+                    </h:panelGroup>
+
+                    <h:panelGroup id="AktivniKorisnici" layout="block" rendered="#{konzola.otvorenoAktivniKorisnici==true}">
+                        <h:form id="formKorisnici">
+                            Aktivni korisnici
+                            <p:dataTable  var="korisnik" value="#{konzola.aktivniKorisnici}" rows="10" paginator="true" paginatorPosition="bottom">
+                                <f:facet name="header">
+                                    Aktivni korisnici
+                                </f:facet>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Korisnicko ime" />
+                                    </f:facet>
+                                    <h:outputText value="#{korisnik.korisnickoime}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Lozinka" />
+                                    </f:facet>
+                                    <h:outputText value="#{korisnik.lozinka}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Ime" />
+                                    </f:facet>
+                                    <h:outputText value="#{korisnik.ime}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Prezime" />
+                                    </f:facet>
+                                    <h:outputText value="#{korisnik.prezime}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Email" />
+                                    </f:facet>
+                                    <h:outputText value="#{korisnik.email}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Tip Korisnika" />
+                                    </f:facet>
+                                    <h:outputText value="#{korisnik.tipkorisnika}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Adrese" />
+                                    </f:facet>
+                                    <h:commandLink value="Adrese" action="#{konzola.otvoriAdrese()}" >
+                                        <f:param name="korisnickoIme" value="#{korisnik.korisnickoime}" />
+                                        <f:ajax execute="forma1" render="forma1"/>
+                                    </h:commandLink> 
+                                </p:column>
+
+                            </p:dataTable>
+
+                            <h:panelGroup id="AdreseKorisnika" layout="block" rendered="#{konzola.otvorenoAdrese==true}">
+                                <p:dataTable  var="adresa" value="#{konzola.adreseKorisnika}" rows="10" paginator="true" paginatorPosition="bottom">
+                                    <f:facet name="header">
+                                        Adrese korisnika
+                                    </f:facet>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="ID" />
+                                        </f:facet>
+                                        <h:outputText value="#{adresa.idadresa}" />
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Adresa" />
+                                        </f:facet>
+                                        <h:outputText value="#{adresa.adresa}" />
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Latitude" />
+                                        </f:facet>
+                                        <h:outputText value="#{adresa.geoloc.latitude}" />
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Longitude" />
+                                        </f:facet>
+                                        <h:outputText value="#{adresa.geoloc.longitude}" />
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Prognoza" />
+                                        </f:facet>
+                                        <h:commandLink value="Prognoza" action="#{konzola.otvoriTrenutnoPrognoza()}" >
+                                            <f:param name="adresa" value="#{adresa.adresa}" />
+                                            <f:ajax execute="forma1" render="forma1"/>
+                                        </h:commandLink> 
+                                    </p:column>
+
+                                </p:dataTable>
+                                <h:panelGroup id="TrenutnaPrognoza" layout="block" rendered="#{konzola.otvorenoTrenutnoPrognoza==true}">
+                                    <h2>Trenutna prognoza</h2><br/><br/>
+                                    <h:outputText value="#{konzola.trenutnaPrognoza}"/><br/><br/>
+                                    <h:form>
+                                        <h:commandButton value="Zatvori prognozu" action="#{konzola.zatvoriTrenutnoPrognoza()}">
+                                            <f:ajax render="forma1"/>
+                                        </h:commandButton>
+
+                                    </h:form>
+                                </h:panelGroup>
+
+                            </h:panelGroup>
+                        </h:form>
+                    </h:panelGroup>
+
+                    <h:panelGroup id="Konzola" layout="block" rendered="#{konzola.otvorenaKoznola}">
+                        <h2>Konzola</h2><br/><br/>
+                        <h:form>
+                            <p:focus for="terminal" />
+
+                            <p:terminal id="terminal" widgetVar="term" commandHandler="#{konzola.handleCommand}"
+                                        welcomeMessage="Dobrodosli u konzolu. Unesite naredbu" />
+
+                            <p:commandButton type="button" value="Clear" icon="ui-icon-trash" onclick="PF('term').clear()" style="margin-top:10px"/>
+                        </h:form>
+                    </h:panelGroup>
+                </h:form>
+            </ui:define>
+
+
+            <ui:define name="bottom">
+                Josip Primorac &copy; 2015
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+
+</html>
+
+
+

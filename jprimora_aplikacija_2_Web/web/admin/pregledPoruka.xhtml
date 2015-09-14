@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view locale="#{lokalizacija.vazecaLocalizacija}">
+        
+        <h:body>
+            <ui:composition template=".././predlozak.xhtml">
+
+                <ui:define name="naslov">
+                    #{m.admin_poruke}
+                </ui:define>
+
+                <ui:define name="top">
+                    #{m.admin_poruke}
+                </ui:define>
+
+                <ui:define name="left">
+                    <h:link outcome="/index.xhtml" value="#{m.index_odabirJezika}"/><br/>
+                    <h:link outcome="/odjava.xhtml" value="#{m.odjava_naziv}"/><br/>
+                    <h:link outcome="azuriranjeCjenika" value="#{m.admin_cjenik}"/><br/>
+                    <h:link outcome="pregledKorisnika" value="#{m.admin_korisnici}"/><br/>
+                    <h:link outcome="pregledDnevnika" value="#{m.admin_dnevnik}"/>
+
+                </ui:define>
+
+                <ui:define name="content">
+                    #{m.admin_poruke}
+                    <h:panelGroup layout="block">
+                        <h:form>
+                            <h:selectOneListbox value="#{pregledPoruka.odabranaMapa}">
+                                <f:selectItems value="#{pregledPoruka.mape}"/>
+                            </h:selectOneListbox><br/>
+                            <h:commandButton value=" Odaberi mapu " action="#{pregledPoruka.odaberiMapu()}"/>
+                        </h:form>
+                        <h:form id="tablica">
+                            <p:dataTable value="#{pregledPoruka.poruke}" var="p" paginatorPosition="bottom" paginator="true" rows="#{pregledPoruka.brojPorukaZaPrikaz}" >
+                                <p:column>
+                                    <f:facet name="header">#{m.pregledPoruka_salje}</f:facet>
+                                        #{p.salje}
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">#{m.pregledPoruka_kada}</f:facet>
+                                    <h:outputText value="#{p.vrijeme}">
+                                        <f:convertDateTime pattern="dd.MM.yyyy hh:mm:ss"></f:convertDateTime>
+                                    </h:outputText>
+
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">#{m.pregledPoruka_predmet}</f:facet>
+                                        #{p.predmet}
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">#{m.pregledPoruka_vrsta}</f:facet>
+                                        #{p.vrsta}
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">#{m.pregledPoruka_otvori}</f:facet>
+                                    <!--TODO ovdje sredit otvaranje jedne poruke -->
+
+                                    <h:commandLink value="#{m.pregledPoruka_otvori}" action="#{pregledPoruka.otvoriPoruku()}" >
+                                        <f:param name="idPoruke" value="#{p.id}" />
+                                    </h:commandLink> 
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">#{m.pregledPoruka_izbrisi}</f:facet>
+                                    <!--TODO ovdje sredit otvaranje jedne poruke -->
+
+                                    <h:commandLink value="#{m.pregledPoruka_izbrisi}" action="#{pregledPoruka.izbrisiPoruku()}" >
+                                        <f:param name="idPoruke" value="#{p.id}" />
+                                        <f:ajax render="tablica"/>
+                                    </h:commandLink> 
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </h:panelGroup>
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+</html>
+
